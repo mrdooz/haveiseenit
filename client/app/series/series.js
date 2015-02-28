@@ -21,9 +21,6 @@ angular.module('myApp.series', ['ngRoute'])
         });
       });
 
-      $scope.onTitleClick = function(seriesId) {
-      };
-
       $scope.onSeasonClick = function(seriesId, seasonNum) {
         // When a season is clicked, download the episodes, if they aren't already downloaded
         if (!$scope.episodes[seriesId] || !$scope.episodes[seriesId][seasonNum] || $scope.episodes[seriesId][seasonNum].length === 0) {
@@ -54,6 +51,7 @@ angular.module('myApp.series', ['ngRoute'])
 
       $scope.onEpisodeClick = function(seriesId, seasonNum, episodeNum) {
 
+        // If the episode isn't available, bail
         var episode = $scope.episodesById[seriesId][seasonNum][episodeNum];
         if (!episode || !episode.available)
           return;
@@ -72,11 +70,5 @@ angular.module('myApp.series', ['ngRoute'])
         request.success(function(data) {
             episode.seen = !episode.seen;
           });
-
-        // If the episode is available, toggle the seen flag
-        //$http.get('http://localhost:8080/series/' + seriesId + '/' + seasonNum + '/' + episodeNum + '/state').success(function(data) {
-        //  episode.seen = !episode.seen;
-        //});
       }
-
     }]);

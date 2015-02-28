@@ -1,29 +1,31 @@
 <div class="panel panel-default">
-	<div class="panel-heading">
-		<h3 class="panel-title">HAVE I SEEN IT</h3>
-	</div>
+    <div class="panel-heading">
+        <h3 class="panel-title">HAVE I SEEN IT</h3>
+    </div>
 
-	<div class="panel-body">
-		<accordion>
-			<accordion-group heading={{s.name}} ng-repeat="s in series" ng-click="onTitleClick(s.id)">
-				<accordion>
-					<accordion-group heading="Season {{season}}" ng-repeat="season in s.seasons" ng-click="onSeasonClick(s.id, season)">
-						<ul class="list-group">
-							<li class="list-group-item"
-								ng-repeat="episode in episodes[s.id][season]">
-						<span popover="{{episode.description}}" popover-placement="right" popover-trigger="mouseenter">
-							{{episode.episode}} - {{episode.title}}
-						</span>
-						<span style="cursor: pointer" class="label {{ episode.available ? (episode.seen ? 'label-success' : 'label-info') : 'label-default'}}"
-							  ng-click="onEpisodeClick(s.id, season, episode.episode)">
-							{{ episode.airdate }}
-						</span>
-							</li>
-						</ul>
-					</accordion-group>
-				</accordion>
-			</accordion-group>
-		</accordion>
-	</div>
+    <div class="panel-body">
+        <accordion>
+            <accordion-group heading={{s.name}} ng-repeat="s in series">
+                <accordion>
+                    <accordion-group heading="Season {{season}}" ng-repeat="season in s.seasons"
+                                     ng-click="onSeasonClick(s.id, season)">
+                        <ul class="list-group">
+                            <li class="list-group-item" ng-repeat="episode in episodes[s.id][season]">
+								<span popover="{{episode.description}}" popover-placement="right"
+                                      popover-trigger="mouseenter">
+								{{episode.episode}} - {{episode.title}}
+								</span>
+						        <span style="cursor: pointer"
+                                      class="label {{ episode.available ? (episode.seen ? 'label-success' : 'label-info') : 'label-default'}}"
+                                      ng-click="onEpisodeClick(s.id, season, episode.episode)">
+		    					{{ episode.airdate }}
+						        </span>
+                            </li>
+                        </ul>
+                    </accordion-group>
+                </accordion>
+            </accordion-group>
+        </accordion>
+    </div>
 </div>
 
